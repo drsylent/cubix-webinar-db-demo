@@ -11,5 +11,7 @@ FROM eclipse-temurin:17-jre
 RUN mkdir /opt/app && chown 1001 -R /opt/app
 USER 1001
 WORKDIR /opt/app
+ENV OTEL_SERVICE_NAME=""
+ADD --chown=1001 https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.20.2/opentelemetry-javaagent.jar opentelemetry.jar
 COPY --chown=1001 --from=builder /opt/build/target/*.jar app.jar
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-javaagent:/opt/app/opentelemetry.jar", "-jar", "app.jar"]
