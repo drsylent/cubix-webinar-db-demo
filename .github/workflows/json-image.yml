@@ -1,8 +1,8 @@
-name: Docker Image CI (OpenTelemetry)
+name: Docker Image CI (JSON)
 
 on:
   push:
-    branches: [ "opentelemetry" ]
+    branches: [ "json-log" ]
 
 jobs:
   build:
@@ -16,6 +16,6 @@ jobs:
     - name: Docker login
       run: docker login ghcr.io -u drsylent -p ${{ github.token }}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ghcr.io/drsylent/cubix/webinar/db:opentelemetry
+      run: docker build . --file Dockerfile --tag ghcr.io/drsylent/cubix/webinar/db:json
     - name: Push the Docker image
-      run: docker push ghcr.io/drsylent/cubix/webinar/db:opentelemetry
+      run: docker push ghcr.io/drsylent/cubix/webinar/db:json
