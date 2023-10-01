@@ -1,0 +1,21 @@
+name: Snapshot build
+
+on:
+  push:
+    branches-ignore: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Docker login
+      run: docker login ghcr.io -u drsylent -p ${{ github.token }}
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ghcr.io/drsylent/cubix/webinar/db:snapshot
+    - name: Push the Docker image
+      run: docker push ghcr.io/drsylent/cubix/webinar/db:snapshot
