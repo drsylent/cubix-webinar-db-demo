@@ -1,8 +1,8 @@
-name: Docker Image CI (JSON)
+name: Main build
 
 on:
   push:
-    branches: [ "json-log" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -16,6 +16,6 @@ jobs:
     - name: Docker login
       run: docker login ghcr.io -u drsylent -p ${{ github.token }}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ghcr.io/drsylent/cubix/webinar/db:json
+      run: docker build . --file Dockerfile --tag ghcr.io/drsylent/cubix/webinar/db:latest
     - name: Push the Docker image
-      run: docker push ghcr.io/drsylent/cubix/webinar/db:json
+      run: docker push ghcr.io/drsylent/cubix/webinar/db:latest
